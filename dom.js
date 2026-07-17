@@ -87,3 +87,76 @@ console.log("4. all li children of ul:", liChildren);
 const footer = document.querySelector("footer");
 const body = footer.parentElement;
 console.log("5. body from footer:", body);
+//  MODIFYING CONTENT 
+
+//  TEXT CONTENT
+const h1 = document.querySelector("h1");
+
+// Reading text
+console.log("textContent:", h1.textContent);
+console.log("innerText:", h1.innerText);
+
+// Modifying text
+h1.textContent = "DOM Manipulation Masterclass";
+console.log("h1 changed to:", h1.textContent);
+
+
+//  HTML CONTENT
+const article = document.querySelector("article");
+
+// Reading HTML
+console.log("article innerHTML:", article.innerHTML);
+
+// Modifying HTML
+article.innerHTML = `
+    <h2>Updated Article</h2>
+    <p>This content was changed with JavaScript!</p>
+`;
+
+// Safer: textContent escapes HTML
+const userInput = "<script>alert('hacked')</script>";
+article.textContent = userInput;
+console.log("Safer with textContent:", article.textContent);
+
+
+//  ATTRIBUTES
+const link = document.querySelector(".nav-link");
+
+// Get attribute
+console.log("href getAttribute:", link.getAttribute("href"));
+console.log("href property:", link.href);
+
+// Set attribute
+link.setAttribute("href", "https://example.com");
+link.href = "https://example.com";
+
+// Check attribute
+console.log("has target:", link.hasAttribute("target"));
+
+// Remove attribute
+link.removeAttribute("target");
+
+// Data attributes
+const element = document.querySelector(".container");
+element.dataset.id = "123";
+element.dataset.category = "main";
+console.log("data-id:", element.dataset.id);
+console.log("data-category:", element.dataset.category);
+element.dataset.newAttr = "value";
+
+
+//  STYLES
+const container = document.querySelector(".container");
+
+// Inline styles
+container.style.backgroundColor = "#f0f0f0";
+container.style.padding = "30px";
+container.style.borderRadius = "8px";
+
+// Multiple styles
+Object.assign(container.style, {
+    backgroundColor: "#333",
+    color: "white",
+    padding: "20px"
+});
+console.log("Styles updated!");
