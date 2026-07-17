@@ -160,3 +160,84 @@ Object.assign(container.style, {
     padding: "20px"
 });
 console.log("Styles updated!");
+//  ADDING & REMOVING ELEMENTS 
+
+//  CREATING ELEMENTS
+// Create new element
+const newParagraph = document.createElement("p");
+newParagraph.textContent = "This is a new paragraph added with JS";
+newParagraph.className = "content highlight";
+
+// Add to the page
+const article = document.querySelector("article");
+article.appendChild(newParagraph);
+console.log("Appended new paragraph");
+
+// Insert before another element
+const firstParagraph = article.querySelector("p");
+const newP2 = document.createElement("p");
+newP2.textContent = "This goes before the first paragraph";
+article.insertBefore(newP2, firstParagraph);
+
+// Modern insertion methods
+const newP3 = document.createElement("p");
+newP3.textContent = "prepend example";
+article.prepend(newP3);
+
+const newP4 = document.createElement("p");
+newP4.textContent = "append example";
+article.append(newP4);
+
+firstParagraph.before(document.createElement("hr"));
+firstParagraph.after(document.createElement("hr"));
+
+
+//  REMOVING ELEMENTS
+// Remove an element
+const footer = document.querySelector("footer");
+// footer.remove(); // Commented so we don't actually delete it. Uncomment to test
+console.log("Can remove footer with: footer.remove()");
+
+// Remove child
+const nav = document.querySelector("nav");
+const lastLink = nav.querySelector("li:last-child");
+// lastLink.parentElement.removeChild(lastLink); // Commented to keep nav
+console.log("Can remove last nav item with removeChild");
+
+// Clear all children
+// article.innerHTML = ""; // Simple but dangerous
+// OR safer way:
+function clearElement(el) {
+    while (el.firstChild) {
+        el.removeChild(el.firstChild);
+    }
+}
+console.log("Can clear article with clearElement(article)");
+
+
+//  CLONING ELEMENTS
+const navItem = document.querySelector(".nav-list li");
+const clone = navItem.cloneNode(true);
+clone.querySelector("a").textContent = "Cloned Link";
+clone.querySelector("a").href = "#cloned";
+document.querySelector(".nav-list").appendChild(clone);
+console.log("Cloned a nav item");
+
+
+// BUILD: FUNCTION THAT ADDS NEW NAV ITEM
+function addNavItem(text, href) {
+    // Create li with a.nav-link inside
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.className = "nav-link";
+    a.textContent = text;
+    a.href = href;
+    li.appendChild(a);
+    
+    // Add to the nav list
+    document.querySelector(".nav-list").appendChild(li);
+}
+
+addNavItem("Blog", "/blog");
+addNavItem("Portfolio", "/portfolio");
+console.log("Added Blog and Portfolio to nav");
