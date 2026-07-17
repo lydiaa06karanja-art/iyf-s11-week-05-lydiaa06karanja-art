@@ -241,3 +241,114 @@ function addNavItem(text, href) {
 addNavItem("Blog", "/blog");
 addNavItem("Portfolio", "/portfolio");
 console.log("Added Blog and Portfolio to nav");
+//   EVENT LISTENERS 
+
+//  BASIC EVENTS
+const button = document.createElement("button");
+button.textContent = "Click Me";
+button.style.margin = "10px";
+button.style.padding = "10px 20px";
+document.body.appendChild(button);
+
+// Adding event listeners
+button.addEventListener("click", function() {
+    console.log("Button clicked!");
+});
+
+// Arrow function
+button.addEventListener("click", () => {
+    console.log("Clicked again!");
+});
+
+// Named function (can be removed later)
+function handleClick() {
+    console.log("Handled!");
+}
+button.addEventListener("click", handleClick);
+
+// Remove event listener after 5 seconds as example
+setTimeout(() => {
+    button.removeEventListener("click", handleClick);
+    console.log("Named listener removed");
+}, 5000);
+
+
+//  EVENT TYPES
+
+// 1. Mouse events - using the container
+const container = document.querySelector(".container");
+container.addEventListener("click", () => console.log("Container clicked"));
+container.addEventListener("dblclick", () => console.log("Container double clicked"));
+container.addEventListener("mouseenter", () => console.log("Mouse entered container"));
+container.addEventListener("mouseleave", () => console.log("Mouse left container"));
+container.addEventListener("mousemove", (e) => {
+    // console.log("Mouse moving:", e.clientX, e.clientY); // Commented to avoid spam
+});
+
+// 2. Keyboard events - using the name input
+const nameInput = document.querySelector("#name");
+nameInput.addEventListener("keydown", (e) => console.log("Key down:", e.key));
+nameInput.addEventListener("keyup", (e) => console.log("Key up:", e.key));
+nameInput.addEventListener("keypress", (e) => console.log("Key press:", e.key));
+
+// 3. Form events
+const form = document.querySelector("#contact-form");
+const emailInput = document.querySelector("#email");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault(); // Stop page refresh
+    console.log("Form submitted!");
+});
+
+emailInput.addEventListener("focus", () => console.log("Email input focused"));
+emailInput.addEventListener("blur", () => console.log("Email input lost focus"));
+emailInput.addEventListener("input", (e) => console.log("Typing:", e.target.value));
+emailInput.addEventListener("change", () => console.log("Email value changed"));
+
+// 4. Window events
+window.addEventListener("load", () => console.log("Page fully loaded"));
+window.addEventListener("resize", () => console.log("Window resized"));
+window.addEventListener("scroll", () => console.log("Page scrolled"));
+
+
+// BUILD: CLICK COUNTER
+let count = 0;
+
+// Create elements
+const counterDisplay = document.createElement("h2");
+counterDisplay.textContent = `Count: ${count}`;
+
+const btnPlus = document.createElement("button");
+btnPlus.textContent = "+";
+btnPlus.style.margin = "5px";
+
+const btnMinus = document.createElement("button");
+btnMinus.textContent = "-";
+btnMinus.style.margin = "5px";
+
+const btnReset = document.createElement("button");
+btnReset.textContent = "Reset";
+btnReset.style.margin = "5px";
+
+// Add to page
+document.body.append(counterDisplay, btnPlus, btnMinus, btnReset);
+
+// Event listeners
+btnPlus.addEventListener("click", () => {
+    count++;
+    counterDisplay.textContent = `Count: ${count}`;
+});
+
+btnMinus.addEventListener("click", () => {
+    if (count > 0) { // Count cannot go below 0
+        count--;
+    }
+    counterDisplay.textContent = `Count: ${count}`;
+});
+
+btnReset.addEventListener("click", () => {
+    count = 0;
+    counterDisplay.textContent = `Count: ${count}`;
+});
+
+console.log("Click counter ready!");
