@@ -559,3 +559,11 @@ clearCompletedBtn.addEventListener("click", function() {
   todos = todos.filter(todo => !todo.completed);
   renderTodos();
 });
+// DAY 4: CONTENT COPIER 
+const copyBtn = document.getElementById("copyBtn");
+const source = document.getElementById("source");
+const target = document.getElementById("target");
+
+copyBtn.addEventListener("click", () => {
+  target.innerHTML = source.innerHTML;
+});
