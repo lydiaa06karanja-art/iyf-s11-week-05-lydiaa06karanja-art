@@ -567,3 +567,8 @@ const target = document.getElementById("target");
 copyBtn.addEventListener("click", () => {
   target.innerHTML = source.innerHTML;
 });
+// DAY 5: DARK MODE TOGGLE
+const toggleBtn = document.getElementById("darkModeToggle");
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
