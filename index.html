@@ -17,6 +17,7 @@
                 <li><a href="#" class="nav-link">About</a></li>
                 <li><a href="#" class="nav-link">Contact</a></li>
             </ul>
+            <button id="darkModeToggle"> Dark Mode</button>
         </nav>
     </header>
 
@@ -47,9 +48,16 @@
     <h4>Target Box</h4>
     <p>Waiting for content...</p>
   </div>
-</section>
+</section> 
         </section>
 <style>
+    body.dark { 
+  background: #1a1a1a; 
+  color: white; 
+  transition: background 0.3s, color 0.3s; 
+}
+body.dark a { color: #4da3ff; } /* makes links blue in dark mode */
+body.dark .container { border-color: #555; } /* dark border */
     .error {
   border: 2px solid red;
 }
