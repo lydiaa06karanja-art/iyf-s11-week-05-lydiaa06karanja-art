@@ -371,4 +371,27 @@ document.addEventListener("keydown", function(event) {
     event.preventDefault();
     form.submit();
   }
+// BUILD: Delegated Task List
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
+
+addTaskBtn.addEventListener("click", function() {
+  if (taskInput.value.trim() === "") return;
+  const li = document.createElement("li");
+  li.innerHTML = `${taskInput.value} <button class="delete-btn">X</button>`;
+  taskList.appendChild(li);
+  taskInput.value = "";
+});
+
+taskList.addEventListener("click", function(event) {
+  // 1. Click delete button
+  if (event.target.classList.contains("delete-btn")) {
+    event.target.parentElement.remove();
+  }
+  
+  // 2. Click the li itself
+  if (event.target.tagName === "LI") {
+    event.target.classList.toggle("completed");
+  }
 });
