@@ -352,11 +352,23 @@ btnReset.addEventListener("click", () => {
 });
 
 console.log("Click counter ready!");
-// BUILD: Keyboard Shortcuts 
+// BUILD: Keyboard Shortcuts
 document.addEventListener("keydown", function(event) {
-  // Ctrl+S: Show "Saved!" alert
+  // 1. Ctrl+S: Show "Saved!" alert
   if (event.ctrlKey && event.key.toLowerCase() === "s") {
-    event.preventDefault(); 
+    event.preventDefault();
     alert("Saved!");
+  }
+
+  // 2. Escape: Clear all inputs
+  if (event.key === "Escape") {
+    const inputs = document.querySelectorAll("input, textarea");
+    inputs.forEach(input => input.value = "");
+  }
+
+  // 3. Ctrl+Enter: Submit form
+  if (event.ctrlKey && event.key === "Enter") {
+    event.preventDefault();
+    form.submit();
   }
 });
