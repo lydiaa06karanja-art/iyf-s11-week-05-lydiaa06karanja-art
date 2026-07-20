@@ -35,6 +35,26 @@
                 <button type="submit">Submit</button>
             </form>
         </section>
+<style>
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+#taskInput, #addTaskBtn {
+  margin: 5px;
+  padding: 8px;
+}
+.delete-btn {
+  margin-left: 10px;
+  cursor: pointer;
+}
+</style>
+
+<h2>Task List</h2>
+<input type="text" id="taskInput" placeholder="Add task">
+<button id="addTaskBtn">Add</button>
+<ul id="taskList"></ul>
+
     </main>
 
     <footer>
