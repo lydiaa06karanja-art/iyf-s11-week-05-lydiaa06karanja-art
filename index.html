@@ -55,12 +55,64 @@
   margin-left: 10px;
   cursor: pointer;
 }
-</style>
+    /* TODO APP STYLES */
+#todo-app { margin-top: 40px; }
+#todo-input { padding: 8px; width: 70%; }
+#todo-form button { padding: 8px 12px; }
 
-<h2>Task List</h2>
-<input type="text" id="taskInput" placeholder="Add task">
-<button id="addTaskBtn">Add</button>
-<ul id="taskList"></ul>
+.filters { margin: 15px 0; }
+.filter { 
+  padding: 6px 12px; 
+  margin-right: 5px; 
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+.filter.active { 
+  background: #007bff; 
+  color: white; 
+  border-color: #007bff;
+}
+
+#todo-list { list-style: none; padding: 0; }
+#todo-list li { 
+  padding: 10px; 
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+}
+#todo-list li.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.stats { margin-top: 15px; display: flex; justify-content: space-between; }
+.delete-btn { 
+  background: red; 
+  color: white; 
+  border: none; 
+  padding: 3px 8px; 
+  cursor: pointer;
+}
+</style>
+    <section id="todo-app">
+      <h2>My To-Do List</h2>
+      <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="What needs to be done?">
+        <button type="submit">Add</button>
+      </form>
+      <div class="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="active">Active</button>
+        <button class="filter" data-filter="completed">Completed</button>
+      </div>
+      <ul id="todo-list"></ul>
+      <div class="stats">
+        <span id="items-left">0 items left</span>
+        <button id="clear-completed">Clear Completed</button>
+      </div>
+    </section>
+
 
     </main>
 
