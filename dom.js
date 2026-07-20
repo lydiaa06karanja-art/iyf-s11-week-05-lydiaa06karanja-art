@@ -461,3 +461,101 @@ function isValid(data) {
 function showSuccess(message) {
   alert(message);
 }
+// MINI-PROJECT
+let todos = [];
+let currentFilter = "all";
+
+const todoForm = document.getElementById("todo-form");
+const todoInput = document.getElementById("todo-input");
+const todoList = document.getElementById("todo-list");
+const itemsLeft = document.getElementById("items-left");
+const clearCompletedBtn = document.getElementById("clear-completed");
+const filterBtns = document.querySelectorAll(".filter");
+
+// 1. ADD TODO
+todoForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const text = todoInput.value.trim();
+  if (text === "") return;
+  
+  const todo = {
+    id: Date.now(),
+    text: text,
+    completed: false
+  };
+  todos.push(todo);
+  todoInput.value = "";
+  renderTodos();
+});
+
+// 2. CREATE TODO ELEMENT
+function createTodoElement(todo) {
+  const li = document.createElement("li");
+  if (todo.completed) li.classList.add("completed");
+  
+  li.innerHTML = `
+    <span>${todo.text}</span>
+    <button class="delete-btn" data-id="${todo.id}">X</button>
+  `;
+  
+  // Toggle complete on click
+  li.querySelector("span").addEventListener("click", () => toggleTodo(todo.id));
+  // Delete on button click
+  li.querySelector(".delete-btn").addEventListener("click", () => deleteTodo(todo.id));
+  
+  return li;
+}
+
+// 3. RENDER TODOS
+function renderTodos() {
+  todoList.innerHTML = "";
+  let filteredTodos = todos;
+  
+  if (currentFilter === "active") {
+    filteredTodos = todos.filter(todo => !todo.completed);
+  } else if (currentFilter === "completed") {
+    filteredTodos = todos.filter(todo => todo.completed);
+  }
+  
+  filteredTodos.forEach(todo => {
+    todoList.appendChild(createTodoElement(todo));
+  });
+  
+  updateStats();
+}
+
+// 4. TOGGLE COMPLETE
+function toggleTodo(id) {
+  todos = todos.map(todo => 
+    todo.id === id ? { ...todo, completed: !todo.completed } : todo
+  );
+  renderTodos();
+}
+
+// 5. DELETE TODO
+function deleteTodo(id) {
+  todos = todos.filter(todo => todo.id !== id);
+  renderTodos();
+}
+
+// 6. UPDATE STATS
+function updateStats() {
+  const activeCount = todos.filter(todo => !todo.completed).length;
+  itemsLeft.textContent = `${activeCount} items left`;
+}
+
+// 7. FILTER TODOS
+filterBtns.forEach(btn => {
+  btn.addEventListener("click", function() {
+    filterBtns.forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+    currentFilter = this.dataset.filter;
+    renderTodos();
+  });
+});
+
+// 8. CLEAR COMPLETED
+clearCompletedBtn.addEventListener("click", function() {
+  todos = todos.filter(todo => !todo.completed);
+  renderTodos();
+});
