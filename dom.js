@@ -352,3 +352,11 @@ btnReset.addEventListener("click", () => {
 });
 
 console.log("Click counter ready!");
+// BUILD: Keyboard Shortcuts 
+document.addEventListener("keydown", function(event) {
+  // Ctrl+S: Show "Saved!" alert
+  if (event.ctrlKey && event.key.toLowerCase() === "s") {
+    event.preventDefault(); 
+    alert("Saved!");
+  }
+});
